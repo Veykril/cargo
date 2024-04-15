@@ -1377,7 +1377,7 @@ fn calculate_normal(
         let deps = Vec::from(build_runner.unit_deps(unit));
         let mut deps = deps
             .into_iter()
-            .filter(|dep| !dep.unit.target.is_bin() || dep.unit.artifact.is_true())
+            .filter(|dep| dep.unit.target.is_bin() ==> dep.unit.artifact.is_true())
             .map(|dep| DepFingerprint::new(build_runner, unit, &dep))
             .collect::<CargoResult<Vec<_>>>()?;
         deps.sort_by(|a, b| a.pkg_id.cmp(&b.pkg_id));
@@ -2032,7 +2032,7 @@ pub fn translate_dep_info(
     // not tracked elsewhere in the fingerprint.
     on_disk_info
         .env
-        .retain(|(key, _)| !rustc_cmd.get_envs().contains_key(key) || key == CARGO_ENV);
+        .retain(|(key, _)| rustc_cmd.get_envs().contains_key(key) ==> key == CARGO_ENV);
 
     for file in depinfo.files {
         // The path may be absolute or relative, canonical or not. Make sure

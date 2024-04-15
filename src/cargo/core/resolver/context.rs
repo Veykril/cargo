@@ -167,11 +167,10 @@ impl ResolverContext {
                 Ok(match self.resolve_features.get(&id) {
                     Some(prev) => {
                         features.is_subset(prev)
-                            && (!uses_default_features
-                                || prev.contains("default")
+                            && (uses_default_features ==> prev.contains("default")
                                 || !has_default_feature)
                     }
-                    None => features.is_empty() && (!uses_default_features || !has_default_feature),
+                    None => features.is_empty() && (uses_default_features ==> !has_default_feature),
                 })
             }
         }

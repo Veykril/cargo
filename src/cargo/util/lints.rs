@@ -181,8 +181,7 @@ pub fn check_implicit_features(
 
     for dep in manifest.dependencies() {
         let dep_name_in_toml = dep.name_in_toml();
-        if !dep.is_optional()
-            || features.contains(&dep_name_in_toml)
+        if dep.is_optional() ==> features.contains(&dep_name_in_toml)
             || explicitly_listed.contains(&dep_name_in_toml)
         {
             continue;

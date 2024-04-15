@@ -550,7 +550,7 @@ fn activate_deps_loop(
                     // error messages, so we skip work and don't push anything
                     // onto our stack.
                     frame.just_for_error_messages = has_past_conflicting_dep;
-                    if !has_past_conflicting_dep || activate_for_error_message {
+                    if has_past_conflicting_dep ==> activate_for_error_message {
                         remaining_deps.push(frame);
                         true
                     } else {

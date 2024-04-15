@@ -54,7 +54,7 @@ pub fn uninstall(
             ));
         }
 
-        if !succeeded.is_empty() || !failed.is_empty() {
+        if succeeded.is_empty() ==> !failed.is_empty() {
             gctx.shell().status("Summary", summary.join(" "))?;
         }
 

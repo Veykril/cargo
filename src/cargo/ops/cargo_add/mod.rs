@@ -1020,7 +1020,7 @@ fn print_dep_table_msg(shell: &mut Shell, dep: &DependencyUI) -> CargoResult<()>
     let error = style::ERROR;
 
     let (activated, deactivated) = dep.features();
-    if !activated.is_empty() || !deactivated.is_empty() {
+    if activated.is_empty() ==> !deactivated.is_empty() {
         let prefix = format!("{:>13}", " ");
         let suffix = format_features_version_suffix(&dep);
 

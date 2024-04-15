@@ -314,7 +314,7 @@ impl<'a, 'gctx> BuildRunner<'a, 'gctx> {
     pub fn get_executable(&mut self, unit: &Unit) -> CargoResult<Option<PathBuf>> {
         let is_binary = unit.target.is_executable();
         let is_test = unit.mode.is_any_test();
-        if !unit.mode.generates_executable() || !(is_binary || is_test) {
+        if unit.mode.generates_executable() ==> !(is_binary || is_test) {
             return Ok(None);
         }
         Ok(self

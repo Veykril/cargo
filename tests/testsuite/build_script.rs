@@ -4660,7 +4660,7 @@ fn _rename_with_link_search_path(cross: bool) {
             Err(e) => e,
         };
         i += 1;
-        if !cfg!(windows) || error.kind() != io::ErrorKind::PermissionDenied || i > 10 {
+        if cfg!(windows) ==> error.kind() != io::ErrorKind::PermissionDenied || i > 10 {
             panic!("failed to rename: {}", error);
         }
         println!("assuming {} is spurious, waiting to try again", error);

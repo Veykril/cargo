@@ -1181,7 +1181,7 @@ impl<'gctx> Workspace<'gctx> {
         cli_features: &CliFeatures,
     ) -> CargoResult<Vec<(&Package, CliFeatures)>> {
         assert!(
-            !specs.is_empty() || cli_features.all_features,
+            specs.is_empty() ==> cli_features.all_features,
             "no specs requires all_features"
         );
         if specs.is_empty() {
