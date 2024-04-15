@@ -120,7 +120,7 @@ fn build_all_urls(
         if !seen.insert(dep.unit.clone()) {
             continue;
         }
-        if !dep.unit.target.is_linkable() || dep.unit.mode.is_doc() {
+        if dep.unit.target.is_linkable().implies(dep.unit.mode.is_doc()) {
             continue;
         }
         for (registry, location) in &map.registries {

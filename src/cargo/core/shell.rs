@@ -548,7 +548,7 @@ fn supports_color(choice: anstream::ColorChoice) -> bool {
 }
 
 fn supports_unicode(stream: &dyn IsTerminal) -> bool {
-    !stream.is_terminal() || supports_unicode::supports_unicode()
+    stream.is_terminal().implies(supports_unicode::supports_unicode())
 }
 
 fn supports_hyperlinks() -> bool {

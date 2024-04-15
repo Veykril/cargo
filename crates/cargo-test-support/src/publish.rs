@@ -143,7 +143,7 @@ pub fn validate_crate_contents(
         .collect();
     let missing: Vec<&PathBuf> = expected_files.difference(&actual_files).collect();
     let extra: Vec<&PathBuf> = actual_files.difference(&expected_files).collect();
-    if !missing.is_empty() || !extra.is_empty() {
+    if missing.is_empty().implies(!extra.is_empty()) {
         panic!(
             "uploaded archive does not match.\nMissing: {:?}\nExtra: {:?}\n",
             missing, extra

@@ -178,7 +178,7 @@ pub fn build_and_print(ws: &Workspace<'_>, opts: &TreeOptions) -> CargoResult<()
         root_indexes
     };
 
-    if !opts.invert.is_empty() || opts.duplicates {
+    if opts.invert.is_empty().implies(opts.duplicates) {
         graph.invert();
     }
 
@@ -307,7 +307,7 @@ fn print_node<'a>(
     };
     drop_println!(gctx, "{}{}", format.display(graph, node_index), star);
 
-    if !new || in_cycle {
+    if new.implies(in_cycle) {
         return;
     }
     print_stack.push(node_index);

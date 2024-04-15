@@ -31,12 +31,11 @@ pub fn main(gctx: &mut GlobalContext) -> CliResult {
         // This does not properly parse `-Z` flags that appear after the subcommand.
         // The error message is not as helpful as the standard one.
         let nightly_features_allowed = matches!(&*features::channel(), "nightly" | "dev");
-        if !nightly_features_allowed
-            || (nightly_features_allowed
+        if nightly_features_allowed.implies((nightly_features_allowed
                 && !args
                     .get_many("unstable-features")
                     .map(|mut z| z.any(|value: &String| value == "unstable-options"))
-                    .unwrap_or(false))
+                    .unwrap_or(false)))
         {
             return Err(anyhow::format_err!(
                 "the `-C` flag is unstable, \
